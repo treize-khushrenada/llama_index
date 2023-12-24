@@ -108,7 +108,10 @@ set_global_service_context(service_context)
 You can pass in a service context to specific part of the pipeline to override the default configuration:
 
 ```python
-query_engine = index.as_query_engine(service_context=service_context)
+from llama_index.response_synthesizers import get_response_synthesizer
+
+response_synthesizer = get_response_synthesizer(response_mode='compact', service_context=service_context)
+query_engine = index.as_query_engine(response_synthesizer = response_synthesizer)
 response = query_engine.query("What did the author do growing up?")
 print(response)
 ```
